@@ -1,0 +1,42 @@
+.progress-bar {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    margin-left: 4rem;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    color: #808080;
+}
+
+.step.completed {
+    color: #000; 
+}
+
+.circle {
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.step.completed .circle {
+    background-color: #223cc6; 
+}
+
+.step.current .circle {
+    background-color: #000; 
+    color: #fff;
+}
+
+.step span {
+    font-size: 14px;
+}
