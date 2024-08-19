@@ -32,7 +32,7 @@ const DriverRegistration = () => {
         const { name, value } = e.target;
 
         if (name === 'state') {
-            // Reset city when state changes
+            
             setFormData({
                 ...formData,
                 state: value,

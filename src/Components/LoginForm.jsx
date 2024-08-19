@@ -13,8 +13,8 @@ function LoginForm() {
 
   const navigate = useNavigate();
 
-  const handleDriver = () => {
-    navigate('/Home');
+  const handleLoginPage = () => {
+    navigate('/LoginPage');
   };
  
   const handleChange = (e) => {
@@ -76,7 +76,7 @@ function LoginForm() {
               onChange={handleChange}
               required
             />
-            <button type="submit"  onClick={handleDriver}>Continue</button>
+            <button type="submit"  onClick={handleLoginPage}>Continue</button>
           </form>
           <p>Or</p>
           <button>
