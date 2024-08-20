@@ -1,10 +1,11 @@
 import React from 'react'
 import "../Styles/Navbar.css"
+import image2 from "../Images/Frame 1000002895.png"
 
 function Navbar() {
   return (
     <div className="Header-Nav">
-        <img src="src/Images/Frame 1000002895.png" alt="Logo" className="logo" />
+        <img src={image2} alt="Logo" className="logo" />
     </div>
   )
 }
