@@ -2,6 +2,7 @@ import  { useState } from "react";
 import "../Styles/LoginForm.css"
 import { useNavigate } from 'react-router-dom';
 import Navbar from "./Navbar";
+import image1 from '../Images/Google.png';
 
 
 function LoginForm() {
@@ -86,7 +87,7 @@ function LoginForm() {
             <div className="or-text">or</div>
             <div className="line"></div>
         </div>
-          <button className="Google"> <img src="src/Images/Google.png" alt="" />
+          <button className="Google"> <img src={image1} alt="" />
              Continue with Google
           </button>
           <p>

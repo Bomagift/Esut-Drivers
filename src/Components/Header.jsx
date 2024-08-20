@@ -1,13 +1,14 @@
 import ProgressBar from '../Components/ProgressBar';
 import "../Styles/Header.css"
 import DriverRegistration from './DriverRegistration';
+import image2 from "../Images/Frame 1000002895.png"
 
 
 const Header = ({ currentStep }) => {
     return (
         <div className="Header">
         <div className="header1">
-            <img src="src/Images/Frame 1000002895.png" alt="Logo" className="logo" />
+            <img src={image2} alt="Logo" className="logo" />
         </div>
         <div className="Head-title">
             <h1><span className='welcome'> Welcome</span>, Savi!</h1>
