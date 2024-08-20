@@ -54,6 +54,13 @@ input[type="file"] {
     margin-top: 9px;
 }
 
+.bar{
+    display: flex;
+    justify-content: row;
+    gap: 10rem;
+    margin-top: 2.5rem;
+    
+}
 .next-step-btn {
     padding: 12px;
     background-color: #223cc6;

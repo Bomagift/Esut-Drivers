@@ -1,5 +1,6 @@
 import '../Styles/ProgressBar.css';
 
+
 const ProgressBar = ({ currentStep }) => {
     const steps = [
         { number: 1, label: 'Personal Information' },
@@ -9,10 +10,7 @@ const ProgressBar = ({ currentStep }) => {
 
     return (
         <div className="progress-bar">
-            <div className="Head-title">
-            <h1>Welcome, Savi</h1>
-            <p>Here's what you need to do to set up your driver account.</p>
-            </div>
+           
             {steps.map((step, index) => (
                 <div
                     key={index}

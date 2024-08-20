@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Header from '../Components/Header';
 import '../Styles/DriverRegistration.css';
 
 const DriverRegistration = () => {
@@ -79,7 +78,6 @@ const DriverRegistration = () => {
 
     return (
         <div className="registration-container">
-            <Header currentStep={step} />
             {step === 1 && (
                 <div className="form-wrapper">
                     <h1 className="welcome-title">Personal Information</h1>

@@ -1,6 +1,7 @@
 import  { useState } from "react";
 import "../Styles/LoginForm.css"
 import { useNavigate } from 'react-router-dom';
+import Navbar from "./Navbar";
 
 
 function LoginForm() {
@@ -32,14 +33,16 @@ function LoginForm() {
   };
 
   return (
-    <div className="account-form">
+    <div className="account-form1">
+      <Navbar/>
+      <div className="account-form">
       {step === 1 && (
         <div className="step-one">
           <h2>Create an account</h2>
           <button onClick={() => setStep(2)}>
             Continue with Email
           </button>
-          <button>
+          <button className="Google"> <img src="src/Images/Google.png" alt="" />
              Continue with Google
           </button>
           <p>
@@ -78,9 +81,13 @@ function LoginForm() {
             />
             <button type="submit"  onClick={handleLoginPage}>Continue</button>
           </form>
-          <p>Or</p>
-          <button>
-            Continue with Google
+          <div className="or-container">
+            <div className="line"></div>
+            <div className="or-text">or</div>
+            <div className="line"></div>
+        </div>
+          <button className="Google"> <img src="src/Images/Google.png" alt="" />
+             Continue with Google
           </button>
           <p>
             Already have an account? <a href="/login">Login</a>
@@ -88,7 +95,7 @@ function LoginForm() {
         </div>
       )}
     </div>
-   
+    </div>
   );
 }
 

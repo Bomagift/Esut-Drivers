@@ -2,12 +2,19 @@
   max-width: 400px;
   margin: 100px auto;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
   text-align: center;
   font-family: Arial, sans-serif;
   align-items: center;
+
 }
+
+.Google{
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #000;
+  
+}
+
 
 h2 {
   margin-bottom: 20px;
@@ -27,12 +34,14 @@ button {
   align-items: center;
 }
 
-button svg {
+button img {
   margin-right: 10px; 
+  width:10px;
 }
 
-button:hover {
-  background-color: #333;
+.or{
+  font-size: 12px;
+
 }
 
 input {
@@ -50,4 +59,38 @@ p {
 a {
   color: #007bff;
   text-decoration: none;
+}
+
+.or-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 20px 0; /* Optional: Adjust the margin to position the component vertically */
+}
+
+.line {
+  width: 40%;
+  height: 2px; 
+  background-color: #cfcfcf; 
+  position: relative;
+}
+
+.line::before,
+.line::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  height: 4px; 
+  background-color: #cfcfcf; 
+  transform-origin: left; 
+  transform: rotate(-45deg); 
+}
+
+
+.or-text {
+  margin: 0 10px; 
+  font-size: 1.2rem; 
+  color: #000; 
+  font-weight: bold;
 }

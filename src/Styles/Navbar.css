@@ -1,17 +1,8 @@
-.header1 {
+.Header-Nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px;
     background-color: #fff;
     border-bottom: 1px solid #e0e0e0;
-}
-
-.logo {
-    height: 20px;
-}
-
-.Head-title{
-    margin-left: 4rem;
-    margin-top: 2rem;
 }
