@@ -43,7 +43,7 @@ function LoginForm() {
           <button onClick={() => setStep(2)}>
             Continue with Email
           </button>
-          <button className="Google"> <img src="src/Images/Google.png" alt="" />
+          <button className="Google"> <img src={image1} alt="" />
              Continue with Google
           </button>
           <p>
