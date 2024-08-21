@@ -9,21 +9,23 @@ const ProgressBar = ({ currentStep }) => {
     ];
 
     return (
+    
         <div className="progress-bar">
-           
             {steps.map((step, index) => (
                 <div
                     key={index}
-                    className={`step ${currentStep > step.number ? 'completed' : ''} ${currentStep === step.number ? 'current' : ''}`}
+                    className={`step ${currentStep >= step.number ? 'completed' : ''}`}
                 >
-                    <div className="circle">
-                        {currentStep > step.number ? '✔' : step.number}
-                    </div>
+                    <div className="circle">{step.number}</div>
                     <span>{step.label}</span>
                 </div>
             ))}
         </div>
+        
+        
     );
 };
 
 export default ProgressBar;
+
+

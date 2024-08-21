@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import '../Styles/DriverRegistration.css';
+import Header from './Header';
+import ProgressBar from './ProgressBar';
 
-const DriverRegistration = () => {
+const DriverRegistration = ({ currentStep }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -77,6 +79,10 @@ const DriverRegistration = () => {
     };
 
     return (
+        <div className="register">
+        <Header/>
+        <div className="bar">
+        <ProgressBar currentStep={currentStep} />
         <div className="registration-container">
             {step === 1 && (
                 <div className="form-wrapper">
@@ -182,6 +188,8 @@ const DriverRegistration = () => {
                     <p className="success-subtitle">Thank you for registering. Your details have been successfully submitted.</p>
                 </div>
             )}
+        </div>
+        </div>
         </div>
     );
 };

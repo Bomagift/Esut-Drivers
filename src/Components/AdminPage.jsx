@@ -1,9 +1,9 @@
 import "../Styles/AdminPage.css"
-import Header from "../Components/Header";
+import Navbar from "./Navbar";
 const AdminPage = () => {
     return (
         <div>
-            <Header/>
+            <Navbar/>
             <h1>Admin Dashboard</h1>
         
         </div>
