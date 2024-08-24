@@ -3,6 +3,8 @@ import "../Styles/LoginForm.css";
 import { useNavigate } from 'react-router-dom';
 import Navbar from "./Navbar";
 import image1 from '../Images/Google.png';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 function LoginForm() {
   const [step, setStep] = useState(1);
@@ -13,10 +15,11 @@ function LoginForm() {
   });
 
   const navigate = useNavigate();
+  
 
-  const handleLoginPage = () => {
-    navigate('/LoginPage');
-  };
+  // const handleLoginPage = () => {
+  //   navigate('/LoginPage');
+  // };
 
   const handleLoginAuth = () => {
     navigate('/LoginAuth');
@@ -29,7 +32,8 @@ function LoginForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    
     e.preventDefault();
 
     if (!formData.username || !formData.email || !formData.password) {
@@ -37,11 +41,18 @@ function LoginForm() {
       return;
     }
 
+   const userdata = await createUserWithEmailAndPassword(auth, formData.email, formData.password)
+   const userref = userdata.user.uid
+   console.log(userref)
     
-    localStorage.setItem('LoggedInUser', formData.username);
+    // localStorage.setItem('LoggedInUser', formData.username);
 
     console.log("User Data Submitted:", formData);
-    handleLoginPage();
+    // handleLoginPage();
+    // history.push('/LoginPage', {state :{userref } } );
+    // navigate('/LoginPage', {state :{userref } } );
+    navigate("/LoginPage", { state: { userRef: userref, username:formData.username } });
+    
   };
 
   return (

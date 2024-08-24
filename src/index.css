@@ -1,0 +1,18 @@
+ul {
+    list-style-type: none; /* Remove default list bullets */
+    padding: 0; /* Remove default padding */
+}
+
+li {
+    display: flex; /* Use flexbox for better alignment */
+    justify-content: space-between; /* Space between driver details and buttons */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px; /* Rounded corners */
+}
+
+button {
+    margin-left: 5px; /* Space between buttons */
+}

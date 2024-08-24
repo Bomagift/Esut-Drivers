@@ -12,7 +12,7 @@ function LoginAuth() {
     const navigate = useNavigate();
 
     const handleLoginPage = () => {
-        navigate('/LoginPage');
+        // navigate('/LoginPage');
     };
 
     const handleChange = (e) => {
