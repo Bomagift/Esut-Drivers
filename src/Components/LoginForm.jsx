@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 function LoginForm() {
+  const [error, setError] = useState('');
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     username: "",
@@ -41,19 +42,27 @@ function LoginForm() {
       return;
     }
 
-   const userdata = await createUserWithEmailAndPassword(auth, formData.email, formData.password)
-   const userref = userdata.user.uid
-   console.log(userref)
-    
-    // localStorage.setItem('LoggedInUser', formData.username);
+try{
+  const userdata = await createUserWithEmailAndPassword(auth, formData.email, formData.password)
+  const userref = userdata.user.uid
+  console.log(userref)
+   
+   // localStorage.setItem('LoggedInUser', formData.username);
 
-    console.log("User Data Submitted:", formData);
-    // handleLoginPage();
-    
-    navigate("/LoginPage", { state: { userRef: userref, username:formData.username } });
-    
+   console.log("User Data Submitted:", formData);
+   // handleLoginPage();
+   
+   navigate("/LoginPage", { state: { userRef: userref, username:formData.username } });
+   
+}catch(err){
+  setError(err.message)
+ console.log(err)
+
+}
   };
-
+  setTimeout(() => {
+    setError(false)
+}, 5000);
   return (
     <div className="account-form1">
       <Navbar />
@@ -77,6 +86,7 @@ function LoginForm() {
         {step === 2 && (
           <div className="step-two">
             <h2>Create an account</h2>
+            {error && <p className='error-message'>{error}</p>}
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
