@@ -71,6 +71,7 @@ const DriverRegistration = ({ currentStep }) => {
                         licensePlate: formData.licensePlate,
                         address: formData.address,
                         state: formData.state,
+                        email:user,
                         city: formData.city,
                         driversLicense: formData.driversLicense,
                         tin: formData.tin,

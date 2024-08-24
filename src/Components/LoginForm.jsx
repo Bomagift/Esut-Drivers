@@ -17,23 +17,14 @@ function LoginForm() {
   const navigate = useNavigate();
   
 
-<<<<<<< HEAD
   // const handleLoginPage = () => {
   //   navigate('/LoginPage');
   // };
-=======
-  const handleDriverRegistration = () => {
-    navigate('/Home');
-  };
->>>>>>> 9d859d36f521fff8bcc531755fc3d03832be8d92
 
   const handleLoginAuth = () => {
     navigate('/LoginAuth');
   };
 
-  const handleAdmin = () => {
-    navigate('/Admin');
-  };
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -57,15 +48,10 @@ function LoginForm() {
     // localStorage.setItem('LoggedInUser', formData.username);
 
     console.log("User Data Submitted:", formData);
-<<<<<<< HEAD
     // handleLoginPage();
-    // history.push('/LoginPage', {state :{userref } } );
-    // navigate('/LoginPage', {state :{userref } } );
+    
     navigate("/LoginPage", { state: { userRef: userref, username:formData.username } });
     
-=======
-    handleDriverRegistration();
->>>>>>> 9d859d36f521fff8bcc531755fc3d03832be8d92
   };
 
   return (
@@ -76,10 +62,11 @@ function LoginForm() {
           <div className="step-one">
             <h2>Create an account</h2>
             <button onClick={() => setStep(2)}>
-              Sign Up As a Driver 
+              Continue with Email
             </button>
-            <button className="Google" onClick={handleAdmin}>
-              Sign Up As an Admin
+            <button className="Google">
+              <img src={image1} alt="" />
+              Continue with Google
             </button>
             <p>
               Already have an account? <a href="#" onClick={handleLoginAuth}>Login</a>
@@ -89,7 +76,7 @@ function LoginForm() {
 
         {step === 2 && (
           <div className="step-two">
-            <h2>Creating an account as Driver</h2>
+            <h2>Create an account</h2>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"

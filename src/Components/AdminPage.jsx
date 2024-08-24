@@ -1,7 +1,8 @@
 import { auth, firestore } from "../firebase";
 import "../Styles/AdminPage.css"
 import Navbar from "./Navbar";
-<<<<<<< HEAD
+
+
 import { collection, query, where ,onSnapshot} from 'firebase/firestore';
 import { useState, useEffect } from "react";
 const AdminPage = () => {
@@ -42,7 +43,44 @@ const AdminPage = () => {
         return () => unsubscribe && unsubscribe(); 
     }, []); 
 
-
+    useEffect(() => {
+        fetch('http://localhost:3001/drivers')
+          .then(response => response.json())
+          .then(data => setDrivers(data))
+          .catch(error => console.error('Error fetching drivers:', error));
+      }, []);
+    
+      const handleApprove = (id) => {
+        const driver = drivers.find(driver => driver.id === id);
+        fetch('http://localhost:3001/approve-driver', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: driver.email })
+        }).then(response => response.json())
+          .then(() => {
+            const updatedDrivers = drivers.map(driver =>
+              driver.id === id ? { ...driver, status: 'Approved' } : driver
+            );
+            setDrivers(updatedDrivers);
+          })
+          .catch(error => console.error('Error:', error));
+      };
+    
+      const handleReject = (id) => {
+        const driver = drivers.find(driver => driver.id === id);
+        fetch('http://localhost:3001/reject-driver', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: driver.email })
+        }).then(response => response.json())
+          .then(() => {
+            const updatedDrivers = drivers.map(driver =>
+              driver.id === id ? { ...driver, status: 'Rejected' } : driver
+            );
+            setDrivers(updatedDrivers);
+          })
+          .catch(error => console.error('Error:', error));
+      };
  
 
     return (
@@ -51,137 +89,74 @@ const AdminPage = () => {
             <h1>Admin Dashboard</h1>
 
             <div>
-            <h2>Drivers Added</h2>
-            {loading ? (
-                <p>Loading drivers...</p>
-            ) : (
-                <ul>
+    <h2>Drivers Added</h2>
+    <div>
+        <nav>
+            <ul>
+                <li>Driver Applications</li>
+                <li>Manage Users</li>
+                <li>View Reports</li>
+            </ul>
+        </nav>
+        <h1>Driver Applications</h1>
+        {loading ? (
+            <p>Loading drivers...</p>
+        ) : (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                      
+                        <th>License</th>
+                        {/* <th>Phone Number</th> */}
+                        {/* <th>Status</th> */}
+                        <th >Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
                     {drivers.length > 0 ? (
                         drivers.map(driver => (
-                            <li key={driver.id} style={{ marginBottom: '10px', border: '1px solid #ccc', padding: '10px' }}>
-                                <div style={{ marginBottom: '5px' }}>
-                                    <strong>name:{driver.firstName} {driver.lastName}</strong>
-                                    <br/>
-                                    <span style={{ marginLeft: '10px' }}>phoneNumber:{driver.phoneNumber}</span>
-                                    <br/>
-                                    <span style={{ marginLeft: '10px' }}>address:{driver. address}</span>
-                                    <br/>
-                                    <span style={{ marginLeft: '10px' }}>licensePlate:{driver. licensePlate}</span>
-                                    <br/>
-                                    <span style={{ marginLeft: '10px' }}>driversLicense:{driver.driversLicense}</span>
-
-                                </div>
-                                <div>
+                            <tr key={driver.id}>
+                                <td>{driver.firstName}</td>
+                                <td>{driver.email}</td>
+                                
+                                <td>{driver.licenseNumber}</td>
+                                <td>{driver.driversLicense}</td>
+                                {/* <td>{driver.phoneNumber}</td> */}
+                                <td>{driver.status}</td>
+                                <td>
                                     <button 
-                                        
-                                        style={{ marginRight: '5px' }}
+                                        disabled={driver.status === 'accepted'} // Disable if already accepted
                                     >
-                                        Accept
+                                        Approve
                                     </button>
                                     <button 
+                                        disabled={driver.status === 'rejected'} // Disable if already rejected
                                     >
                                         Reject
                                     </button>
-                                </div>
-                            </li>
+                                </td>
+                            </tr>
                         ))
                     ) : (
-                        <li>No drivers found.</li>
+                        <tr>
+                            <td colSpan={6}>No drivers found.</td>
+                        </tr>
                     )}
-                </ul>
-            )}
-        </div>
-        </div>
-=======
-import  { useEffect, useState } from 'react';
-import "../Styles/AdminPage.css";
-
-const AdminPage = () => {
-    
-  const [drivers, setDrivers] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:3001/drivers')
-      .then(response => response.json())
-      .then(data => setDrivers(data))
-      .catch(error => console.error('Error fetching drivers:', error));
-  }, []);
-
-  const handleApprove = (id) => {
-    const driver = drivers.find(driver => driver.id === id);
-    fetch('http://localhost:3001/approve-driver', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: driver.email })
-    }).then(response => response.json())
-      .then(() => {
-        const updatedDrivers = drivers.map(driver =>
-          driver.id === id ? { ...driver, status: 'Approved' } : driver
-        );
-        setDrivers(updatedDrivers);
-      })
-      .catch(error => console.error('Error:', error));
-  };
-
-  const handleReject = (id) => {
-    const driver = drivers.find(driver => driver.id === id);
-    fetch('http://localhost:3001/reject-driver', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: driver.email })
-    }).then(response => response.json())
-      .then(() => {
-        const updatedDrivers = drivers.map(driver =>
-          driver.id === id ? { ...driver, status: 'Rejected' } : driver
-        );
-        setDrivers(updatedDrivers);
-      })
-      .catch(error => console.error('Error:', error));
-  };
-
-  return (
-    <div className="step4">
-        <Navbar/>
-    <div>
-      <nav>
-        <ul>
-          <li>Driver Applications</li>
-          <li>Manage Users</li>
-          <li>View Reports</li>
-        </ul>
-      </nav>
-      <h1>Driver Applications</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>License Number</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {drivers.map(driver => (
-            <tr key={driver.id}>
-              <td>{driver.firstName} {driver.lastName}</td>
-              <td>{driver.email}</td>
-              <td>{driver.phoneNumber}</td>
-              <td>{driver.licenseNumber}</td>
-              <td>{driver.status}</td>
-              <td>
-                <button onClick={() => handleApprove(driver.id)}>Approve</button>
-                <button onClick={() => handleReject(driver.id)}>Reject</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                </tbody>
+            </table>
+        )}
     </div>
-    </div>
+</div>
+
+        </div>
+
+
+
+
     
->>>>>>> 9d859d36f521fff8bcc531755fc3d03832be8d92
+
     );
 };
 
