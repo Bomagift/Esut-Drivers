@@ -2,12 +2,14 @@ import { useState } from 'react';
 import '../Styles/DriverRegistration.css';
 import Header from './Header';
 import ProgressBar from './ProgressBar';
+import { auth, firestore } from '../firebase';
+import { doc, setDoc, } from 'firebase/firestore';
 
 const DriverRegistration = ({ currentStep }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
-        email: '',
+        // email: '',
         phoneNumber: '',
         licensePlate: '',
         address: '',
@@ -53,12 +55,37 @@ const DriverRegistration = ({ currentStep }) => {
             [e.target.name]: e.target.files[0]
         });
     };
-
-    const handleSubmit = (e) => {
+    const user = auth.currentUser?.email
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (validateForm()) {
             if (step === 3) {
-                setStep(4); 
+               
+                try {
+                    
+                    const driverDocRef = doc(firestore, 'drivers', `${formData.firstName}-${formData.lastName}`); // Create a unique document reference
+                    await setDoc(driverDocRef, {
+                        firstName: formData.firstName,
+                        lastName: formData.lastName,
+                        phoneNumber: formData.phoneNumber,
+                        licensePlate: formData.licensePlate,
+                        address: formData.address,
+                        state: formData.state,
+                        email:user,
+                        city: formData.city,
+                        driversLicense: formData.driversLicense,
+                        tin: formData.tin,
+                        licensePlateNumber: formData.licensePlateNumber,
+                        createdBy: user, 
+                        createdAt: new Date() 
+                    });
+    
+                   
+                    setStep(4); 
+                } catch (error) {
+                    console.error("Error adding document: ", error);
+                    alert("Failed to register. Please try again.");
+                }
             } else {
                 setStep(step + 1);
             }
@@ -66,10 +93,9 @@ const DriverRegistration = ({ currentStep }) => {
             alert("Please fill in all required fields.");
         }
     };
-
     const validateForm = () => {
         if (step === 1) {
-            return Object.values(formData).slice(0, 8).every(field => field !== '');
+            return Object.values(formData).slice(0, 7).every(field => field !== '');
         } else if (step === 2) {
             return Object.values(formData).slice(8, 11).every(field => field !== '');
         } else if (step === 3) {
@@ -77,6 +103,7 @@ const DriverRegistration = ({ currentStep }) => {
         }
         return false;
     };
+    
 
     return (
         <div className="register">
@@ -101,7 +128,7 @@ const DriverRegistration = ({ currentStep }) => {
                         </div>
                         <div className="form-group">
                             <label>Email <span className="required">*</span></label>
-                            <input name="email" type="email" value={formData.email} onChange={handleChange} required />
+                            <input name="email" type="email" value={user} disabled  />
                         </div>
                         <div className="form-group">
                             <label>Phone Number <span className="required">*</span></label>

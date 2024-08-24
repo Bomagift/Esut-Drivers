@@ -3,8 +3,11 @@ import "../Styles/LoginForm.css";
 import { useNavigate } from 'react-router-dom';
 import Navbar from "./Navbar";
 import image1 from '../Images/Google.png';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 function LoginForm() {
+  const [error, setError] = useState('');
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     username: "",
@@ -13,18 +16,16 @@ function LoginForm() {
   });
 
   const navigate = useNavigate();
+  
 
-  const handleDriverRegistration = () => {
-    navigate('/Home');
-  };
+  // const handleLoginPage = () => {
+  //   navigate('/LoginPage');
+  // };
 
   const handleLoginAuth = () => {
     navigate('/LoginAuth');
   };
 
-  const handleAdmin = () => {
-    navigate('/Admin');
-  };
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -32,7 +33,8 @@ function LoginForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    
     e.preventDefault();
 
     if (!formData.username || !formData.email || !formData.password) {
@@ -40,13 +42,27 @@ function LoginForm() {
       return;
     }
 
-    
-    localStorage.setItem('LoggedInUser', formData.username);
+try{
+  const userdata = await createUserWithEmailAndPassword(auth, formData.email, formData.password)
+  const userref = userdata.user.uid
+  console.log(userref)
+   
+   // localStorage.setItem('LoggedInUser', formData.username);
 
-    console.log("User Data Submitted:", formData);
-    handleDriverRegistration();
+   console.log("User Data Submitted:", formData);
+   // handleLoginPage();
+   
+   navigate("/LoginPage", { state: { userRef: userref, username:formData.username } });
+   
+}catch(err){
+  setError(err.message)
+ console.log(err)
+
+}
   };
-
+  setTimeout(() => {
+    setError(false)
+}, 5000);
   return (
     <div className="account-form1">
       <Navbar />
@@ -55,10 +71,11 @@ function LoginForm() {
           <div className="step-one">
             <h2>Create an account</h2>
             <button onClick={() => setStep(2)}>
-              Sign Up As a Driver 
+              Continue with Email
             </button>
-            <button className="Google" onClick={handleAdmin}>
-              Sign Up As an Admin
+            <button className="Google">
+              <img src={image1} alt="" />
+              Continue with Google
             </button>
             <p>
               Already have an account? <a href="#" onClick={handleLoginAuth}>Login</a>
@@ -68,7 +85,8 @@ function LoginForm() {
 
         {step === 2 && (
           <div className="step-two">
-            <h2>Creating an account as Driver</h2>
+            <h2>Create an account</h2>
+            {error && <p className='error-message'>{error}</p>}
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
