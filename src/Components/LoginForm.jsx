@@ -14,14 +14,17 @@ function LoginForm() {
 
   const navigate = useNavigate();
 
-  const handleLoginPage = () => {
-    navigate('/LoginPage');
+  const handleDriverRegistration = () => {
+    navigate('/Home');
   };
 
   const handleLoginAuth = () => {
     navigate('/LoginAuth');
   };
 
+  const handleAdmin = () => {
+    navigate('/Admin');
+  };
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -41,7 +44,7 @@ function LoginForm() {
     localStorage.setItem('LoggedInUser', formData.username);
 
     console.log("User Data Submitted:", formData);
-    handleLoginPage();
+    handleDriverRegistration();
   };
 
   return (
@@ -52,11 +55,10 @@ function LoginForm() {
           <div className="step-one">
             <h2>Create an account</h2>
             <button onClick={() => setStep(2)}>
-              Continue with Email
+              Sign Up As a Driver 
             </button>
-            <button className="Google">
-              <img src={image1} alt="" />
-              Continue with Google
+            <button className="Google" onClick={handleAdmin}>
+              Sign Up As an Admin
             </button>
             <p>
               Already have an account? <a href="#" onClick={handleLoginAuth}>Login</a>
@@ -66,7 +68,7 @@ function LoginForm() {
 
         {step === 2 && (
           <div className="step-two">
-            <h2>Create an account</h2>
+            <h2>Creating an account as Driver</h2>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
