@@ -5,7 +5,6 @@ import { auth, firestore } from "../firebase";
 import { useState,useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
 const Header = () => {
-  const loggedInUser = localStorage.getItem("LoggedInUser");
 
   const [username, setUsername] = useState("");
   

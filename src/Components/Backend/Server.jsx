@@ -28,7 +28,7 @@ let drivers = [
     },
     status: 'Pending'
   },
-  // Add more drivers as needed
+  
 ];
 
 app.get('/drivers', (req, res) => {
@@ -40,7 +40,6 @@ app.post('/approve-driver', (req, res) => {
   const driver = drivers.find(driver => driver.email === email);
   if (driver) {
     driver.status = 'Approved';
-    // Here, send the approval email logic goes
     res.json({ message: 'Driver approved successfully' });
   } else {
     res.status(404).json({ message: 'Driver not found' });
@@ -52,7 +51,6 @@ app.post('/reject-driver', (req, res) => {
   const driver = drivers.find(driver => driver.email === email);
   if (driver) {
     driver.status = 'Rejected';
-    // Here, send the rejection email logic goes
     res.json({ message: 'Driver rejected successfully' });
   } else {
     res.status(404).json({ message: 'Driver not found' });
