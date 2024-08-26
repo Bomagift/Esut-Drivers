@@ -9,7 +9,6 @@ const DriverRegistration = ({ currentStep }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
-        // email: '',
         phoneNumber: '',
         licensePlate: '',
         address: '',

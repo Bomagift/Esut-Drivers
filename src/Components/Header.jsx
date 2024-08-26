@@ -32,7 +32,6 @@ const Header = () => {
       </div>
       <div className="Head-title">
         <h1>
-          {/* <span className="welcome"> Welcome</span>, {loggedInUser}! */}
           <span className="welcome"> Welcome</span>, {username || "User"}!
         </h1>
         <p>Here's what you need to do to set up your driver account.</p>

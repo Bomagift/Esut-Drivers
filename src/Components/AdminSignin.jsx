@@ -29,7 +29,7 @@ function AdminSignin() {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    // Clear error when user starts typing
+    
     if (error) setError('');
   };
 
@@ -48,13 +48,13 @@ function AdminSignin() {
 
       if (userdoc.exists()) {
         console.log('Admin exists');
-        navigate('/Adminpage');
+        navigate('/AdminPage');
       } else {
         setError('Admin not found');
         console.error('Admin not found');
       }
     } catch (err) {
-      setError(err.message);  // Display the error message
+      setError(err.message); 
       console.error('Error signing in:', err);
     }
 

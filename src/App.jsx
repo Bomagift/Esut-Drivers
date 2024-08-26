@@ -15,6 +15,7 @@ function App() {
             <Route path="AdminPage" element={<AdminPage/>} />
             <Route path="LoginAuth" element={<LoginAuth/>} />
             <Route path="Admin" element={<AdminSignin/>} />
+            
             </Routes>
     </Router>
   );

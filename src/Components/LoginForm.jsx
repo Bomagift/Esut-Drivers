@@ -17,11 +17,6 @@ function LoginForm() {
 
   const navigate = useNavigate();
   
-
-  // const handleLoginPage = () => {
-  //   navigate('/LoginPage');
-  // };
-
   const handleLoginAuth = () => {
     navigate('/LoginAuth');
   };
@@ -47,11 +42,8 @@ try{
   const userref = userdata.user.uid
   console.log(userref)
    
-   // localStorage.setItem('LoggedInUser', formData.username);
 
    console.log("User Data Submitted:", formData);
-   // handleLoginPage();
-   
    navigate("/LoginPage", { state: { userRef: userref, username:formData.username } });
    
 }catch(err){
